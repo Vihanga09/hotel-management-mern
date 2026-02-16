@@ -26,20 +26,30 @@ const ChatBot = () => {
         setMessage("");
 
         try {
-            // Backend එක දුවන URL එක Port 5000 බව සහතික කරගන්න
+            // Make sure backend is running on Port 5000
             const res = await axios.post("http://localhost:5000/api/chatbot/chat", { message });
             const aiMessage = { role: "ai", text: res.data.reply };
             setChat((prev) => [...prev, aiMessage]);
         } catch (error) {
             console.error("Chat Error:", error);
-            setChat((prev) => [...prev, { role: "ai", text: "සොරි මචං, Backend එකට කනෙක්ට් වෙන්න බැහැ! සර්වර් එක චෙක් කරන්න." }]);
+            
+            // Better error messages in English
+            let errorMsg = "Sorry, I cannot connect to the server. Please make sure the backend is running.";
+            
+            if (error.response?.data?.error) {
+                errorMsg = error.response.data.error;
+            } else if (error.message.includes("Network Error")) {
+                errorMsg = "Network error. Please check if the backend server is running on port 5000.";
+            }
+            
+            setChat((prev) => [...prev, { role: "ai", text: errorMsg }]);
         } finally {
             setLoading(false);
         }
     };
 
     return (
-        /* දකුණු පැත්තට සහ අනිත් දේවල් වලට උඩින් පේන්න style tag එක පාවිච්චි කළා */
+        /* Fixed to bottom right corner with high z-index */
         <div style={{ 
             position: 'fixed', 
             bottom: '30px', 

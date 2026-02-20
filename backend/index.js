@@ -6,7 +6,6 @@ import roomRouter from './routes/roomRouter.js';
 import bookingRouter from './routes/bookingRouter.js';
 import reviewRouter from './routes/reviewRoutes.js';
 import authRouter from './routes/AuthRouter.js';
-import chatRouter from './routes/chatRoutes.js';
 
 const app = express();
 
@@ -31,10 +30,7 @@ mongoose.connect(connectionString).then(() => {
 app.use("/rooms", roomRouter);
 app.use("/bookings", bookingRouter);
 app.use("/reviews", reviewRouter);
-app.use("/api/auth", authRouter);
-
-//chatbot route
-app.use("/api/chatbot", chatRouter); 
+app.use("/api/auth", authRouter); 
 
 app.listen(5000, () => {
     console.log("Server is started on port 5000 🚀");

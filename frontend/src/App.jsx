@@ -13,7 +13,6 @@ import SignupView from './components/SignupView'
 import AdminDashboard from './components/AdminDashboard'
 import AdminRoute from './components/AdminRoute'
 import MyBookings from './components/MyBookings' 
-import ChatBot from './components/ChatBot' 
 
 // Utils and Styles
 import { lightTheme, darkTheme } from './utils/themes'
@@ -49,8 +48,6 @@ function App() {
             <Route path="/admin" element={<AdminRoute><AdminDashboard theme={theme} reviews={reviews} fetchReviews={fetchReviews} /></AdminRoute>} />
           </Routes>
         </main>
-        
-        <ChatBot /> {/* chatbot */}
         
         <footer style={{ ...styles.footer, background: isDarkMode ? '#000' : '#0f172a' }}>© 2026 Grand Horizon Hotel</footer>
       </div>
